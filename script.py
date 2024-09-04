@@ -6,6 +6,7 @@ if not os.path.exists('scripts'):
 
 # Solicitar al usuario el nombre del archivo .sh
 output_script = input("Escribe el nombre del archivo .sh (sin extensión): ") + ".sh"
+diccionario = "/usr/share/wordlists/" + input("Escribe el nombre del diccionario (sin extensión): ") + ".txt"
 
 # Ruta completa donde se guardará el archivo .sh
 output_path = os.path.join('scripts', output_script)
@@ -38,7 +39,7 @@ while True:
         resultado_dominio = f"{dominio_base}"
 
         # Generar el comando con los parámetros dados
-        comando = f"dnsrecon -d {dominio} -t brt -c {resultado_dominio}_result.csv"
+        comando = f"dnsrecon -d {dominio} -t brt -D {diccionario} -c {resultado_dominio}_result.csv"
 
         # Guardar el comando en el archivo .sh
         with open(output_path, 'a') as file:
@@ -62,7 +63,7 @@ while True:
         resultado_dominio = f"{dominio_base}"
 
         # Comando que se quiere eliminar
-        comando_a_eliminar = f"dnsrecon -d {dominio} -t brt -c {resultado_dominio}_result.csv"
+        comando_a_eliminar = f"dnsrecon -d {dominio} -t brt -D {diccionario} -c {resultado_dominio}_result.csv"
 
         # Leer el archivo y filtrar los comandos
         with open(output_path, 'r') as file:
