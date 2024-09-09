@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 # Crear la carpeta 'scripts' si no existe
 if not os.path.exists('scripts'):
@@ -25,7 +26,7 @@ while True:
     if accion == 'salir':
         print(f"Script guardado en {output_path}")
         break
-
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") # Generar una cadena de texto con la fecha y hora actual
     if accion == 'agregar':
         # Solicitar el nombre del dominio
         dominio_base = input("Escribe el nombre del dominio (sin '.com' o '.cl'): ")
@@ -43,7 +44,7 @@ while True:
 
         # Generar el comando con los parámetros dados
         for diccionario in diccionarios:
-            comando = f"dnsrecon -d {dominio} -t brt -D {diccionario} -c {resultado_dominio}_result.csv"
+            comando = f"dnsrecon -d {dominio} -t brt -D {diccionario} -c {resultado_dominio}_{timestamp}_result.csv"
             with open(output_path, 'a') as file:
                 file.write(comando + "\n")
             print(f"Comando añadido: {comando}")
