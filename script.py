@@ -6,9 +6,9 @@ if not os.path.exists('scripts'):
 
 # Solicitar al usuario el nombre del archivo .sh
 output_script = input("Escribe el nombre del archivo .sh (sin extensión): ") + ".sh"
-top_1m = './dicts/subdomains-top1million-110000.txt'
-raft = './dicts/raft-large-words-lowercase-cleanned.txt' # Hay que poner la ruta del diccionario limpio
-letter = './dicts/letter.txt'
+top_1m = '../dicts/subdomains-top1million-110000.txt'
+raft = '../dicts/raft-large-words-lowercase-cleanned.txt' # Hay que poner la ruta del diccionario limpio
+letter = '../dicts/letter.txt'
 diccionarios = [top_1m, raft, letter]
 
 # Ruta completa donde se guardará el archivo .sh
