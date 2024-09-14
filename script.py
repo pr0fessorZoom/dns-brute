@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 # Crear la carpeta 'scripts' si no existe
 if not os.path.exists('scripts'):
@@ -7,8 +6,8 @@ if not os.path.exists('scripts'):
 
 # Solicitar al usuario el nombre del archivo .sh
 output_script = input("Escribe el nombre del archivo .sh (sin extensión): ") + ".sh"
-top_1m = '../dicts/subdomains-top1million-110000.txt'
-raft = '../dicts/raft-large-words-lowercase-cleanned.txt' # Hay que poner la ruta del diccionario limpio
+top_1m = '/usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt'
+raft = '../dicts/raft-cleaned.txt' # Hay que poner la ruta del diccionario limpio
 letter = '../dicts/letter.txt'
 diccionarios = [top_1m, raft, letter]
 
@@ -26,7 +25,7 @@ while True:
     if accion == 'salir':
         print(f"Script guardado en {output_path}")
         break
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") # Generar una cadena de texto con la fecha y hora actual
+    
     if accion == 'agregar':
         # Solicitar el nombre del dominio
         dominio_base = input("Escribe el nombre del dominio (sin '.com' o '.cl'): ")
@@ -43,8 +42,8 @@ while True:
         resultado_dominio = f"{dominio_base}"
 
         # Generar el comando con los parámetros dados
-        for diccionario in diccionarios:
-            comando = f"dnsrecon -d {dominio} -t brt -D {diccionario} -c {resultado_dominio}_{timestamp}_result.csv"
+        for idx,diccionario in enumerate (diccionarios):
+            comando = f"dnsrecon -d {dominio} -t brt -D {diccionario} -c {resultado_dominio}_{idx}_result.csv"
             with open(output_path, 'a') as file:
                 file.write(comando + "\n")
             print(f"Comando añadido: {comando}")
